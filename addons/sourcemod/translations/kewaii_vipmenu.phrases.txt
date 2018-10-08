@@ -1,0 +1,141 @@
+"Phrases"
+{
+  "VIPMenu Title"
+  {
+	"en" "Buffs Menu"
+	"pt" "Menu VIP"
+	"hu" "VIP Menü"
+  }
+  "BuffsMenu Title"
+  {
+	"en" "Buffs Menu"
+	"pt" "Menu de Benefícios"
+	"hu" "Előny menü"
+  } 
+  "WeaponsMenu Title"
+  {
+	"en" "Weapons Menu"
+	"pt" "Menu de Armas"
+	"hu" "Fegyver menü
+  } 
+  "Weapons Item"
+  {
+	"en" "Weapons"
+	"pt" "Armas"
+	"hu" "Fegyverek"
+  } 
+  "Buffs Item"
+  {
+	"en" "Buffs"
+	"pt" "Benefícios"
+	"hu" "Előnyök"
+  } 
+  "Menu Go Back"
+  {
+	"en" "Back"
+	"pt" "Voltar"
+	"hu" "Vissza"
+  }
+  "Menu Leave"
+  {
+	"en" "Leave"
+	"pt" "Sair"
+	"hu" "Bezár"
+  }
+  "WallHack Grenade"
+  {
+	"en" "WallHack Grenade"
+	"pt" "Granada de WallHack"
+	"hu" "Taktikai gránát"
+  } 
+  "Medic Kit"
+  {
+	"en" "Medic Kit"
+	"pt" "Kit Médico"
+	"hu" "Gyógyszer"
+  } 
+  "Unlimited Bullets"
+  {
+	"en" "Unlimited Bullets"
+	"pt" "Balas Infinitas"
+	"hu" "Végtelen lőszer"
+  } 
+  "AWP Deagle"
+  {
+	"en" "AWP and Deagle"
+	"pt" "AWP e Deagle"
+	"hu" "AWP és Deagle"
+  } 
+  "AK47 Deagle"
+  {
+	"en" "AK47 and Deagle"
+	"pt" "AK47 e Deagle"
+	"hu" "AK47 és Deagle"
+  } 
+  "M4A4 Deagle"
+  {
+	"en" "M4A4 and Deagle"
+	"pt" "M4A4 e Deagle"
+	"hu" "M4A4 és Deagle"
+  } 
+  "M4A1-S Deagle"
+  {
+	"en" "M4A1-S and Deagle"
+	"pt" "M4A1-S e Deagle"
+	"hu" "M4A1-S és Deagle"
+  }
+  "Weapon Selected"
+  {
+	"en" "You selected weapon: "
+	"pt" "Escolheste a arma: "
+	"hu" "Választott fegyvered: "
+  }
+  "Buff Selected"
+  {
+	"en" "You selected buff: "
+	"pt" "Escolheste o benefício: "
+	"hu" "Kiválaszott előnyöd: "
+  }
+  "Reached Buffs Limit"
+  {
+	"en" "You reached the limit of buffs per round"
+	"pt" "Chegaste ao limite de benefícios por ronda"
+	"hu" "Elérheted az előny limitet ebben a körben"
+  }
+  "Reached Weapons Limit"
+  {
+	"en" "You reached the limit of weapons per round"
+	"pt" "Chegaste ao limite de armas por ronda"
+	"hu" "Elérted a fegyver limitet ebben a körben"
+  }
+  "Player Not Dead"
+  {
+    	"en" "You are not dead."
+	"pt" "Não estás morto."
+	"hu" "Jelenleg életben vagy."
+	
+  }
+  "VIPSpawn Not Allowed"
+  {
+	"en" "If you want to {red}vipspawn{green} you have to buy {red}VIP{green}."
+	"pt" "Se queres usar vipspawn tens que comprar {red}VIP{green}."
+	"hu" "Ha fel akarsz éledni ,akkor venned kell {red}VIP{green}-et."
+  }
+  "Player Revived"
+  {
+    "#format" "{1:N}"
+	"en" "Player {red}{1} {green}used vipspawn!"
+	"pt" "O Jogador {red}{1} {green}usou vipspawn!"
+	"hu" "{red}{1} {green}felhasznált egy feleledést!"
+  }
+  "Player Used Max VIPSpawns"
+  {
+	"en" "You already used all vipspawns!"
+	"pt" "Já usaste todos os vipspawn!"
+  }
+  "All Benefits Chosen"
+  {
+	"en" "You already used all benefits!"
+	"pt" "Já usaste todos os benefícios!"
+  }
+}
