@@ -7,7 +7,7 @@
 #include <cstrike>
 #include <sdktools>
 #include <sdkhooks>
-#include <csgocolors>
+#include <multicolors>
 
 #define DMG_FALL   (1 << 5)
 
@@ -37,11 +37,11 @@ public Action OnTakeDamage(int client, &attacker, &inflictor, &Float:damage, &da
 #pragma semicolon 1
 #pragma newdecls required
 
-#define PLUGIN_NAME 			"VipMenu"
+#define PLUGIN_NAME 			"VIPMenu"
 #define PLUGIN_AUTHOR 			"Kewaii"
-#define PLUGIN_DESCRIPTION		"General VipMenu"
-#define PLUGIN_VERSION 			"1.7.7"
-#define PLUGIN_TAG 				"{pink}[VipMenu by Kewaii]{green}"
+#define PLUGIN_DESCRIPTION		"VIPMenu for any game mode"
+#define PLUGIN_VERSION 			"1.1.0"
+#define PLUGIN_TAG 				"{pink}[Kewaii VIPMenu]{green}"
 
 public Plugin myinfo =
 {
@@ -228,7 +228,7 @@ Menu CreateBuffsMenu(int client)
 {
 	Menu menu = new Menu(BuffsMenuHandler);
 	char title[64];
-	Format(title, sizeof(title), "%T by Kewaii", "BuffsMenu Title", client);
+	Format(title, sizeof(title), "[Kewaii] %T", "BuffsMenu Title", client);
 	menu.SetTitle(title);	
 	g_bBuffWHEnabled = GetConVarBool(g_Cvar_BuffWHEnabled);
 	g_bBuffMedicKitEnabled = GetConVarBool(g_Cvar_BuffMedicKitEnabled);
@@ -256,7 +256,7 @@ Menu CreateWeaponsMenu(int client)
 {
 	Menu menu = new Menu(WeaponsMenuHandler);
 	char title[64];
-	Format(title, sizeof(title), "%T by Kewaii", "WeaponsMenu Title", client);
+	Format(title, sizeof(title), "[Kewaii] %T ", "WeaponsMenu Title", client);
 	menu.SetTitle(title);
 	g_bWeaponAWPEnabled = GetConVarBool(g_Cvar_WeaponAWPEnabled);
 	g_bWeaponAK47Enabled = GetConVarBool(g_Cvar_WeaponAK47Enabled);
@@ -301,7 +301,7 @@ Menu CreateMainMenu(int client)
 	g_bBuffWHEnabled = GetConVarBool(g_Cvar_BuffWHEnabled);
 	g_bBuffMedicKitEnabled = GetConVarBool(g_Cvar_BuffMedicKitEnabled);
 	char title[64], menuItem[64];
-	Format(title, sizeof(title), "%T by Kewaii", "VIPMenu Title", client);
+	Format(title, sizeof(title), "[Kewaii] %T", "VIPMenu Title", client);
 	if (g_bWeaponsEnabled && g_bBuffsEnabled) {
 		menu = new Menu(MainMenuHandler);
 		menu.SetTitle(title);	
