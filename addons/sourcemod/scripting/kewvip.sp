@@ -14,7 +14,7 @@
 ConVar g_Cvar_NoFallDamageEnabled;
 ConVar g_Cvar_NoFallSoundEnabled;
 
-public Action SoundHook(clients[64], &numClients, String:sound[PLATFORM_MAX_PATH], &Ent, &channel, &Float:volume, &level, &pitch, &flags)
+public Action SoundHook(int clients[64], int &numClients, char sound[PLATFORM_MAX_PATH], int &Ent, int &channel, float &volume, int &level, int &pitch, int &flags)
 {
 	if (GetConVarBool(g_Cvar_NoFallSoundEnabled))
 	{
@@ -25,7 +25,7 @@ public Action SoundHook(clients[64], &numClients, String:sound[PLATFORM_MAX_PATH
 	return Plugin_Continue;
 }
 
-public Action OnTakeDamage(int client, &attacker, &inflictor, &Float:damage, &damagetype)
+public Action OnTakeDamage(int client, int &attacker, int &inflictor, float &damage, int &damagetype)
 {
 	if ((damagetype & DMG_FALL) && GetConVarBool(g_Cvar_NoFallDamageEnabled))
 	{
@@ -37,10 +37,10 @@ public Action OnTakeDamage(int client, &attacker, &inflictor, &Float:damage, &da
 #pragma semicolon 1
 #pragma newdecls required
 
-#define PLUGIN_NAME 			"VIPMenu"
+#define PLUGIN_NAME 			"KewVIP"
 #define PLUGIN_AUTHOR 			"Kewaii"
 #define PLUGIN_DESCRIPTION		"VIPMenu for any game mode"
-#define PLUGIN_VERSION 			"1.1.0"
+#define PLUGIN_VERSION 			"1.2.0"
 #define PLUGIN_TAG 				"{pink}[Kewaii VIPMenu]{green}"
 
 public Plugin myinfo =
@@ -49,7 +49,7 @@ public Plugin myinfo =
     author				=    PLUGIN_AUTHOR,
     description			=    PLUGIN_DESCRIPTION,
     version				=    PLUGIN_VERSION,
-    url					= 	   "http://steamcommunity.com/id/KewaiiGamer/"
+    url					= 	   "https://steamcommunity.com/id/KewaiiGamer/"
 };
 
 int revived[MAXPLAYERS+1] = 0;
@@ -95,35 +95,35 @@ bool g_bWeaponsEnabled, g_bBuffsEnabled, g_bWeaponAWPEnabled, g_bWeaponAK47Enabl
 
 public void OnPluginStart()
 {
-	LoadTranslations("kewaii_vipmenu.phrases");
-	g_Cvar_BenefitsMax = CreateConVar("kewaii_vipmenu_benefits_max", "3", "Maximum allowed amount of benefits per round");
+	LoadTranslations("kewvip.phrases");
+	g_Cvar_BenefitsMax = CreateConVar("kewvip_benefits_max", "3", "Maximum allowed amount of benefits per round");
 	
-	g_Cvar_WeaponsEnabled = CreateConVar("kewaii_vipmenu_weapons", "1", "Enables/Disables Weapons", _, true, 0.0, true, 1.0);
-	g_Cvar_WeaponsMax = CreateConVar("kewaii_vipmenu_weapons_max", "2", "Maximum allowed amount of weapons per round");
+	g_Cvar_WeaponsEnabled = CreateConVar("kewvip_weapons", "1", "Enables/Disables Weapons", _, true, 0.0, true, 1.0);
+	g_Cvar_WeaponsMax = CreateConVar("kewvip_weapons_max", "2", "Maximum allowed amount of weapons per round");
 	
-	g_Cvar_BuffsEnabled = CreateConVar("kewaii_vipmenu_buffs", "1", "Enables/Disables Buffs", _, true, 0.0, true, 1.0);
-	g_Cvar_BuffsMax = CreateConVar("kewaii_vipmenu_buffs_max", "2", "Maximum allowed amount of buffs per round");
+	g_Cvar_BuffsEnabled = CreateConVar("kewvip_buffs", "1", "Enables/Disables Buffs", _, true, 0.0, true, 1.0);
+	g_Cvar_BuffsMax = CreateConVar("kewvip_buffs_max", "2", "Maximum allowed amount of buffs per round");
 	
-	g_Cvar_WeaponAWPEnabled = CreateConVar("kewaii_vipmenu_weapon_awp", "1", "Enables/Disables AWP", _, true, 0.0, true, 1.0);
-	g_Cvar_WeaponAK47Enabled = CreateConVar("kewaii_vipmenu_weapon_ak47", "1", "Enables/Disables AK47", _, true, 0.0, true, 1.0);
-	g_Cvar_WeaponM4A1Enabled = CreateConVar("kewaii_vipmenu_weapon_m4a1", "1", "Enables/Disables M4A4", _, true, 0.0, true, 1.0);
-	g_Cvar_WeaponM4A1_SilencerEnabled = CreateConVar("kewaii_vipmenu_weapon_m4a1_silencer", "1", "Enables/Disables M4A1-S", _, true, 0.0, true, 1.0);
+	g_Cvar_WeaponAWPEnabled = CreateConVar("kewvip_weapon_awp", "1", "Enables/Disables AWP", _, true, 0.0, true, 1.0);
+	g_Cvar_WeaponAK47Enabled = CreateConVar("kewvip_weapon_ak47", "1", "Enables/Disables AK47", _, true, 0.0, true, 1.0);
+	g_Cvar_WeaponM4A1Enabled = CreateConVar("kewvip_weapon_m4a1", "1", "Enables/Disables M4A4", _, true, 0.0, true, 1.0);
+	g_Cvar_WeaponM4A1_SilencerEnabled = CreateConVar("kewvip_weapon_m4a1_silencer", "1", "Enables/Disables M4A1-S", _, true, 0.0, true, 1.0);
 	
-	g_Cvar_BuffWHEnabled = CreateConVar("kewaii_vipmenu_buff_wh", "1", "Enables/Disables WH Grenade", _, true, 0.0, true, 1.0);
-	g_Cvar_BuffMedicKitEnabled = CreateConVar("kewaii_vipmenu_buff_medickit", "1", "Enables/Disables Medic Kit", _, true, 0.0, true, 1.0);
+	g_Cvar_BuffWHEnabled = CreateConVar("kewvip_buff_wh", "1", "Enables/Disables WH Grenade", _, true, 0.0, true, 1.0);
+	g_Cvar_BuffMedicKitEnabled = CreateConVar("kewvip_buff_medickit", "1", "Enables/Disables Medic Kit", _, true, 0.0, true, 1.0);
 	
-	g_Cvar_BuffUnlimitedAmmoEnabled = CreateConVar("kewaii_vipmenu_buff_unlimitedammo", "1", "Enables/Disables Unlimited Ammo", _, true, 0.0, true, 1.0);
+	g_Cvar_BuffUnlimitedAmmoEnabled = CreateConVar("kewvip_buff_unlimitedammo", "1", "Enables/Disables Unlimited Ammo", _, true, 0.0, true, 1.0);
 	
-	g_Cvar_AutoHelmetEnabled = CreateConVar("kewaii_vipmenu_auto_helmet", "1", "Enables/Disables Helmet on Spawn", _, true, 0.0, true, 1.0);
-	g_Cvar_AutoArmorEnabled = CreateConVar("kewaii_vipmenu_auto_armor", "1", "Enables/Disables Armor on Spawn", _, true, 0.0, true, 1.0);
-	g_Cvar_AutoArmorQuantity = CreateConVar("kewaii_vipmenu_auto_armorquantity", "100", "Defines Armor Quantity", _, true, 1.0, true, 500.0);
+	g_Cvar_AutoHelmetEnabled = CreateConVar("kewvip_auto_helmet", "1", "Enables/Disables Helmet on Spawn", _, true, 0.0, true, 1.0);
+	g_Cvar_AutoArmorEnabled = CreateConVar("kewvip_auto_armor", "1", "Enables/Disables Armor on Spawn", _, true, 0.0, true, 1.0);
+	g_Cvar_AutoArmorQuantity = CreateConVar("kewvip_auto_armorquantity", "100", "Defines Armor Quantity", _, true, 1.0, true, 500.0);
 	
-	g_Cvar_VIPSpawnEnabled = CreateConVar("kewaii_vipmenu_vipspawn", "1", "Enables/Disables VIPSpawn", _, true, 0.0, true, 1.0);
-	g_Cvar_VIPSpawnQuantity = CreateConVar("kewaii_vipmenu_vipspawn_quantity", "1", "Maximum amount of vipspawns per round", _, true, 0.0);
+	g_Cvar_VIPSpawnEnabled = CreateConVar("kewvip_vipspawn", "1", "Enables/Disables VIPSpawn", _, true, 0.0, true, 1.0);
+	g_Cvar_VIPSpawnQuantity = CreateConVar("kewvip_vipspawn_quantity", "1", "Maximum amount of vipspawns per round", _, true, 0.0);
 	
-	g_Cvar_HealthRegenEnabled = CreateConVar("kewaii_vipmenu_healthregen", "1", "Enables/Disables Health Regen", _, true, 0.0, true, 1.0);
-	g_Cvar_HealthRegenedQuantity = CreateConVar("kewaii_vipmenu_healthregened", "10", "Defines Quantity of Health Regened per kill", _, true, 1.0, true, 50.0);
-	g_Cvar_MaxHealthQuantity = CreateConVar("kewaii_vipmenu_maxhealth", "150", "Defines Max Health that a player can get", _, true, 101.0, true, 500.0);
+	g_Cvar_HealthRegenEnabled = CreateConVar("kewvip_healthregen", "1", "Enables/Disables Health Regen", _, true, 0.0, true, 1.0);
+	g_Cvar_HealthRegenedQuantity = CreateConVar("kewvip_healthregened", "10", "Defines Quantity of Health Regened per kill", _, true, 1.0, true, 50.0);
+	g_Cvar_MaxHealthQuantity = CreateConVar("kewvip_maxhealth", "150", "Defines Max Health that a player can get", _, true, 101.0, true, 500.0);
 	
 	g_Cvar_NoFallSoundEnabled = CreateConVar("kewaii_nofallsound", "1", "Enables/Disables No Fall Sound, 1 = No Sound / 0 = Sound", _, true, 0.0, true, 1.0);
 	g_Cvar_NoFallDamageEnabled = CreateConVar("kewaii_nofalldamage", "1", "Enables/Disables No Fall Damage, 1 = No Damage / 0 = Damage", _, true, 0.0, true, 1.0);
@@ -134,7 +134,7 @@ public void OnPluginStart()
 	RegConsoleCmd("sm_vipspawn", Command_VIPSpawn);
 	RegConsoleCmd("sm_vipmenu", VipMenu, "Opens VIPMenu");
 	
-	AutoExecConfig(true, "kewaii_vipmenu");
+	AutoExecConfig(true, "kewvip");
 	AddNormalSoundHook(SoundHook);
 }
 
